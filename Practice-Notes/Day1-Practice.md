@@ -139,10 +139,19 @@ class Solution {
 ```python
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        nums = [abs(x) for x in nums]
-        nums.sort()
-        nums = [x**2 for x in nums]
-        return nums
+        newNums = []
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            if abs(nums[left]) >= abs(nums[right]):
+                i = nums[left]**2
+                newNums.append(i)
+                left += 1
+            else:
+                i = nums[right]**2
+                newNums.append(i)
+                right -= 1
+        return newNums[::-1]
 ```
 
 <br>
