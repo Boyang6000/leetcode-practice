@@ -35,6 +35,22 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return -1
+```
+
 <br>
 
 ##  27. 移除元素
@@ -63,6 +79,17 @@ class Solution {
         return count;
     }
 }
+```
+
+```python
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        index = 0
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[index] = nums[i]
+                index += 1
+        return index
 ```
 
 <br>
@@ -107,6 +134,15 @@ class Solution {
         return ans;
     }
 }
+```
+
+```python
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        nums = [abs(x) for x in nums]
+        nums.sort()
+        nums = [x**2 for x in nums]
+        return nums
 ```
 
 <br>
