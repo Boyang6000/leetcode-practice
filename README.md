@@ -7,7 +7,7 @@
 ## 📅 每日练习
 
 
-- 2025-08-27 · Day 1：日志 → [Day 1](Practice-Notes/Day1-Practice.md)
+- 2026-05-21 · Day 1：日志 → [Day 1](Practice-Notes/Day1-Practice.md)
 - 2025-08-28 · Day 2：日志 → [Day 2](Practice-Notes/Day2-Practice.md)
 - 2025-08-29 · Day 3：日志 → [Day 3](Practice-Notes/Day3-Practice.md)
 - 2025-08-30 · Day 4：日志 → [Day 4](Practice-Notes/Day4-Practice.md)
