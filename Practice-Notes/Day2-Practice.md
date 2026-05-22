@@ -35,6 +35,22 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        length = float("inf")
+        total = 0
+        left = 0
+        for i in range(len(nums)):
+            total += nums[i]
+            while total >= target:
+                length = min(length, i - left + 1)
+                total -= nums[left]
+                left += 1
+        
+        return length if length != float("inf") else 0
+```
+
 <br>
 
 ##  59. 螺旋矩阵II
@@ -99,6 +115,40 @@ class Solution {
         return ans;
     }
 }
+```
+
+```python
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        count = 0
+        startX = 0
+        startY = 0
+        offset = 1
+        start = 1
+        ans = [[0] * n for _ in range(n)]
+        while count < n // 2:
+            for i in range(startX, n - offset):
+                ans[startX][i] = start
+                start += 1
+            for j in range(startY, n - offset):
+                ans[j][n-offset] = start
+                start += 1
+            for k in range(n - offset, startX, -1):
+                ans[n-offset][k] = start
+                start += 1
+            for m in range(n - offset, startY, -1):
+                ans[m][startY] = start
+                start += 1
+            
+            startX += 1
+            startY += 1
+            offset += 1
+            count += 1
+
+        if n % 2 == 1:
+            ans[n//2][n//2] = n**2
+            
+        return ans
 ```
 
 <br>
