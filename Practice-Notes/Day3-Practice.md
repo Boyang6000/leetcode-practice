@@ -219,14 +219,6 @@ class MyLinkedList:
             cur = cur.next
         cur.next = cur.next.next
         self.size -= 1
-
-# Your MyLinkedList object will be instantiated and called as such:
-# obj = MyLinkedList()
-# param_1 = obj.get(index)
-# obj.addAtHead(val)
-# obj.addAtTail(val)
-# obj.addAtIndex(index,val)
-# obj.deleteAtIndex(index)
 ```
 
 <br>
