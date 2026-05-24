@@ -37,6 +37,23 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = dummy
+        cur = head
+        while cur and cur.next:
+            temp = cur.next
+            prev.next = temp
+            cur.next = temp.next
+            temp.next = cur
+            prev = cur
+            cur = cur.next
+        return dummy.next
+```
+
 <br>
 
 ##  19. 删除链表的倒数第N个节点
@@ -74,6 +91,23 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = dummy
+        slow = dummy
+        for i in range(n):
+            fast = fast.next
+        
+        while fast.next and slow.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return dummy.next
+```
+
 <br>
 
 ##  160. 链表相交
@@ -102,6 +136,18 @@ public class Solution {
         return p1;
     }
 }
+```
+
+```python
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        nodeA = headA
+        nodeB = headB
+        
+        while nodeA != nodeB:
+            nodeA = nodeA.next if nodeA else headB
+            nodeB = nodeB.next if nodeB else headA
+        return nodeA
 ```
 
 <br>
@@ -140,6 +186,25 @@ public class Solution {
         return null;
     }
 }
+```
+
+```python
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        fast = head
+        slow = head
+
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+
+            if fast is slow:
+                temp = head
+                while temp is not slow:
+                    temp = temp.next
+                    slow = slow.next
+                return temp
+        return None
 ```
 
 <br>
