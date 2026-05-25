@@ -1,4 +1,4 @@
-# 📝 LeetCode 学习日志 Day 6
+# 📝 LeetCode 学习日志 Day 5
 
 <br>
 
@@ -35,6 +35,25 @@ class Solution {
         return true;
     }
 }
+```
+
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        dictS = {}
+        for i in range(len(s)):
+            dictS[s[i]] = dictS.get(s[i], 0) + 1
+        for j in range(len(t)):
+            if t[j] in dictS:
+                dictS[t[j]] = dictS[t[j]] - 1
+                if dictS[t[j]] < 0:
+                    return False
+            else:
+                return False
+        return True
 ```
 
 <br>
@@ -77,6 +96,12 @@ class Solution {
         return result;
     }
 }
+```
+
+```python
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        return list(set(nums1) & set(nums2))
 ```
 
 <br>
@@ -122,6 +147,18 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        seen = set()
+        while n != 1:
+            n = sum(int(i)**2 for i in str(n))
+            if n in seen:
+                return False
+            seen.add(n)
+        return True
+```
+
 <br>
 
 ##  1. 两数之和
@@ -154,6 +191,18 @@ class Solution {
         return null;
     }
 }
+```
+
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        check = {}
+
+        for i in range(len(nums)):
+            if nums[i] in check:
+                return [check[nums[i]], i]
+            diff = target - nums[i]
+            check[diff] = i
 ```
 
 <br>
