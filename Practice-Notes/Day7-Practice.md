@@ -10,6 +10,7 @@
 
 ## 💡 思路
 这个就是最基础的swap的运用，设定一个temp来储存值，然后将左边的值放到temp里面，再把右边的值赋给左边，最后把temp的值赋给右边就行
+Python可以不借助temp来swap
 
 <br>
 
@@ -29,6 +30,20 @@ class Solution {
         }
     }
 }
+```
+
+```python
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        i = 0
+        j = len(s) - 1
+        while(i < j):
+            s[i], s[j] = s[j], s[i]
+            i += 1
+            j -= 1
 ```
 
 <br>
@@ -64,6 +79,20 @@ class Solution {
         return new String(arr);
     }
 }
+```
+
+```python
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        s = list(s)
+        for i in range(0, len(s), 2*k):
+            left = i
+            right = min(i+k-1, len(s) - 1)
+            while left < right:
+                s[left], s[right] = s[right], s[left]
+                left += 1
+                right -= 1
+        return ''.join(s)  
 ```
 
 <br>
