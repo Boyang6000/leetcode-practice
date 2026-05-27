@@ -1,4 +1,4 @@
-# 📝 LeetCode 学习日志 Day 7
+# 📝 LeetCode 学习日志 Day 6
 
 <br>
 
@@ -38,6 +38,22 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        ans = {}
+        count = 0
+        for i in nums1:
+            for j in nums2:
+                ans[i + j] = ans.get(i + j, 0) + 1
+
+        for m in nums3:
+            for n in nums4:
+                count += ans.get(0-m-n, 0)
+        
+        return count
+```
+
 <br>
 
 ## 383. 赎金信
@@ -74,6 +90,26 @@ class Solution {
         return true;
     }
 }
+```
+
+```python
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        count = {}
+
+        for ch in magazine:
+            count[ch] = count.get(ch, 0) + 1
+
+        for ch in ransomNote:
+            if ch not in count:
+                return False
+
+            count[ch] -= 1
+
+            if count[ch] < 0:
+                return False
+
+        return True
 ```
 
 <br>
@@ -131,6 +167,38 @@ class Solution {
         return ans;
     }
 }
+```
+
+```python
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        ans = []
+        nums.sort()
+
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                return ans
+            if i > 0 and nums[i-1] == nums[i]:
+                continue
+
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                sum = nums[i] + nums[left] + nums[right]
+                if sum > 0:
+                    right -= 1
+                elif sum < 0:
+                    left += 1
+                else:
+                    ans.append([nums[i], nums[left], nums[right]])
+                    while(left < right and nums[left + 1] == nums[left]):
+                        left += 1
+                    while(left < right and nums[right - 1] == nums[right]):
+                        right -= 1
+
+                    left += 1
+                    right -= 1
+        return ans 
 ```
 
 <br>
@@ -191,6 +259,44 @@ class Solution {
         return ans;
     }
 }
+```
+
+```python
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        ans = []
+        nums.sort()
+
+        for i in range(len(nums)):
+            if nums[i] > target and nums[i] > 0:
+                return ans
+            elif i > 0 and nums[i - 1] == nums[i]:
+                continue
+            for j in range(i + 1, len(nums)):
+                if(nums[i] + nums[j] > target and nums[i] + nums[j] > 0):
+                    break
+                elif j > i + 1 and nums[j - 1] == nums[j]:
+                    continue
+                
+                left = j + 1
+                right = len(nums) - 1
+                while left < right:
+                    sum = nums[i] + nums[j] + nums[left] + nums[right]
+                    if sum > target:
+                        right -= 1
+                    elif sum < target:
+                        left += 1
+                    else:
+                        ans.append([nums[i], nums[j], nums[left], nums[right]])
+                        while(left < right and nums[left + 1] == nums[left]):
+                            left += 1
+                        while(left < right and nums[right - 1] == nums[right]):
+                            right -= 1
+                        
+                        left += 1
+                        right -= 1
+
+        return ans
 ```
 
 <br>
