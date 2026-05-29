@@ -51,6 +51,30 @@ class MyQueue {
 }
 ```
 
+```python
+class MyQueue:
+
+    def __init__(self):
+        self.in_stack = []
+        self.out_stack = []
+
+    def push(self, x: int) -> None:
+        self.in_stack.append(x)
+
+    def pop(self) -> int:
+        self.peek()
+        return self.out_stack.pop()
+
+    def peek(self) -> int:
+        if not self.out_stack:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+        return self.out_stack[-1]
+
+    def empty(self) -> bool:
+        return not self.in_stack and not self.out_stack
+```
+
 <br>
 
 ## 225. 用队列实现栈
@@ -94,6 +118,27 @@ class MyStack {
 }
 ```
 
+```python
+class MyStack:
+
+    def __init__(self):
+        self.q = deque()
+
+    def push(self, x: int) -> None:
+        self.q.append(x)
+        for i in range(len(self.q) - 1):
+            self.q.append(self.q.popleft())
+
+    def pop(self) -> int:
+        return self.q.popleft()
+
+    def top(self) -> int:
+        return self.q[0]
+
+    def empty(self) -> bool:
+        return not self.q
+```
+
 <br>
 
 ## 20. 有效的括号
@@ -130,7 +175,25 @@ class Solution {
         return stack.isEmpty();
     }
 }
+```
 
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        for i in range(len(s)):
+            char = s[i]
+            if char == "(":
+                stack.append(")")
+            elif char == "[":
+                stack.append("]")
+            elif char == "{":
+                stack.append("}")
+            elif not stack or char != stack[-1]:
+                return False
+            else:
+                stack.pop()
+        return not stack  
 ```
 
 <br>
@@ -169,7 +232,19 @@ class Solution {
         return sb.toString();
     }
 }
+```
 
+```python
+class Solution:
+    def removeDuplicates(self, s: str) -> str:
+        stack = []
+        for i in range(len(s)):
+            char = s[i]
+            if not stack or char != stack[-1]:
+                stack.append(char)
+            else:
+                stack.pop()
+        return ''.join(stack) 
 ```
 
 <br>
