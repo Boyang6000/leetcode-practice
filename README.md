@@ -16,7 +16,7 @@
 - 2026-05-27 · Day 7：日志 → [Day 7](Practice-Notes/Day7-Practice.md)
 - 2026-05-28 · Day 8：日志 → [Day 8](Practice-Notes/Day8-Practice.md)
 - 2026-05-29 · Day 9：日志 → [Day 9](Practice-Notes/Day9-Practice.md)
-- 2026-05-30 · Day 10：日志：日志 → [Day 10](Practice-Notes/Day10-Practice.md)
+- 2026-05-30 · Day 10：日志 → [Day 10](Practice-Notes/Day10-Practice.md)
 - 2026-05-31 · Day 11：日志 → [Day 11](Practice-Notes/Day11-Practice.md)
 - 2026-06-01 · Day 12：日志 → [Day 12](Practice-Notes/Day12-Practice.md)
 - 2026-06-02 · Day 13：日志 → [Day 13](Practice-Notes/Day13-Practice.md)
