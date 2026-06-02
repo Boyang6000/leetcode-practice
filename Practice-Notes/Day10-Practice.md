@@ -45,6 +45,33 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for i in tokens:
+            if i == "+":
+                num1 = stack.pop()
+                num2 = stack.pop()
+                stack.append(num1 + num2)
+            elif i == "-":
+                num1 = stack.pop()
+                num2 = stack.pop()
+                stack.append(num2 - num1)
+            elif i == "*":
+                num1 = stack.pop()
+                num2 = stack.pop()
+                stack.append(num1*num2)
+            elif i == "/":
+                num1 = stack.pop()
+                num2 = stack.pop()
+                stack.append(int(num2/num1))
+            else:
+                stack.append(int(i))
+            
+        return stack.pop()
+```
+
 <br>
 
 ## 239. 滑动窗口最大值
@@ -87,6 +114,24 @@ class Solution {
         return ans;
     }
 }
+```
+
+```python
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        max_list = []
+        kept_nums = deque()
+        for i in range(len(nums)):
+            while kept_nums and nums[i] > kept_nums[-1]:
+                kept_nums.pop()
+            kept_nums.append(nums[i])
+
+            if i >= k and nums[i-k] == kept_nums[0]:
+                kept_nums.popleft()
+            if i >= k - 1:
+                max_list.append(kept_nums[0])
+            
+        return max_list
 ```
 
 <br>
@@ -135,6 +180,25 @@ class Solution {
         return res;
     }
 }
+```
+
+```python
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        map_ = {}
+        for i in range(len(nums)):
+            map_[nums[i]] = map_.get(nums[i], 0) + 1
+        
+        pri_que = []
+        for key, freq in map_.items():
+            heapq.heappush(pri_que, (freq, key))
+            if len(pri_que) > k:
+                heapq.heappop(pri_que)
+        
+        result = [0] * k
+        for i in range(k-1, -1, -1):
+            result[i] = heapq.heappop(pri_que)[1]
+        return result
 ```
 
 <br>
