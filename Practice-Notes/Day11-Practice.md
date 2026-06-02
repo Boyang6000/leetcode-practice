@@ -43,6 +43,20 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        def dfs(node):
+            if not node:
+                return
+            res.append(node.val)
+            dfs(node.left)
+            dfs(node.right)
+        dfs(root)
+        return res
+```
+
 ### 迭代法
 
 ```java
@@ -133,6 +147,21 @@ class Solution {
         result.add(root.val);
     }
 }
+```
+
+```python
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        def dfs(node):
+            if not node:
+                return
+            dfs(node.left)
+            dfs(node.right)
+            res.append(node.val)
+        
+        dfs(root)
+        return res
 ```
 
 ### 迭代法
@@ -226,6 +255,21 @@ class Solution {
         inorder(root.right, result);
     }
 }
+```
+
+```python
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        def dfs(node):
+            if not node:
+                return
+            dfs(node.left)
+            res.append(node.val)
+            dfs(node.right)
+        
+        dfs(root)
+        return res
 ```
 
 ### 迭代法
@@ -329,6 +373,27 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        
+        res = []
+
+        def traverse(node, level):
+            if not node:
+                return
+            if len(res) == level:
+                res.append([])
+            res[level].append(node.val)
+            traverse(node.left, level + 1)
+            traverse(node.right, level + 1)
+            
+        traverse(root, 0)
+        return res
+```
+
 ## 107. 二叉树的层序遍历 II
 - 题目链接：[**LeetCode 107. Binary Tree Level Order Traversal II**](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
 - 关键词：**Binary Tree, Queue, BFS**
@@ -371,6 +436,27 @@ class Solution {
         }
     }
 }
+```
+
+```python
+class Solution:
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        queue = collections.deque([root])
+        result = []
+        while queue:
+            level = []
+            for i in range(len(queue)):
+                cur = queue.popleft()
+                level.append(cur.val)
+                if cur.left:
+                    queue.append(cur.left)
+                if cur.right:
+                    queue.append(cur.right)
+            result.append(level)
+        return result[::-1]
 ```
 
 ## 199. 二叉树的右视图
