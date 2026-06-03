@@ -493,6 +493,28 @@ class Solution {
     }
 }
 ```
+
+```python
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        res = []
+        queue = collections.deque([root])
+        while queue:
+            level = len(queue)
+            for i in range(level):
+                node = queue.popleft()
+                if i == level - 1:
+                    res.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        
+        return res
+```
+
 ## 637. 二叉树的层平均值
 - 题目链接：[**LeetCode 637. Average of Levels in Binary Tree**](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
 - 关键词：**Binary Tree, Queue, BFS**
@@ -528,6 +550,27 @@ class Solution {
         return list;
     }
 }
+```
+
+```python
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        if not root:
+            return [0]
+        res = []
+        queue = collections.deque([root])
+        while queue:
+            level = len(queue)
+            total = 0
+            for i in range(level):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                total += node.val
+            res.append(total / level)
+        return res
 ```
 
 ## 429. N叉树的层序遍历
