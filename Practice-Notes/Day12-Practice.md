@@ -32,6 +32,17 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+```
+
 <br>
 
 ## 101. 对称二叉树
@@ -73,6 +84,27 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        def compare(left, right):
+            if left and not right:
+                return False
+            elif not left and right:
+                return False
+            elif not left and not right:
+                return True
+            elif left.val != right.val:
+                return False
+            else:
+                outside = compare(left.left, right.right)
+                inside = compare(left.right, right.left)
+                return outside and inside
+        return compare(root.left, root.right)
+```
+
 <br>
 
 ## 104. 二叉树的最大深度
@@ -96,6 +128,16 @@ class Solution {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 }
+```
+
+```python
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        leftDepth = self.maxDepth(root.left)
+        rightDepth = self.maxDepth(root.right)
+        return max(leftDepth, rightDepth) + 1
 ```
 
 <br>
@@ -123,6 +165,18 @@ class Solution {
         return Math.min(leftDepth, rightDepth) + 1;
     }
 }
+```
+
+```python
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if root is None:
+            return 0
+        if root.left is None and root.right is not None:
+            return 1 + self.minDepth(root.right)
+        if root.left is not None and root.right is None:
+            return 1 + self.minDepth(root.left)
+        return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
 ```
 
 <br>
