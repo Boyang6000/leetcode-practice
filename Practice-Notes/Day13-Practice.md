@@ -33,6 +33,20 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        def getHeight(root):
+            if not root:
+                return 0
+            leftHeight = getHeight(root.left)
+            rightHeight = getHeight(root.right)
+            if leftHeight == -1 or rightHeight == -1 or abs(leftHeight - rightHeight) > 1:
+                return -1
+            return max(leftHeight,rightHeight) + 1
+        return getHeight(root) is not -1
+```
+
 <br>
 
 ## 257. 二叉树的所有路径
@@ -69,6 +83,26 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        path = ''
+        result = []
+        if not root:
+            return result
+        self.traversal(root, path, result)
+        return result
+    
+    def traversal(self, cur: TreeNode, path: str, result: List[str]) -> None:
+        path += str(cur.val)
+        if not cur.left and not cur.right:
+            result.append(path)
+        if cur.left:
+            self.traversal(cur.left, path + '->', result)
+        if cur.right:
+            self.traversal(cur.right, path + '->', result)
+```
+
 <br>
 
 ## 404. 左叶子之和
@@ -97,6 +131,17 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        leftValue = 0
+        if root.left and not root.left.left and not root.left.right:
+            leftValue = root.left.val
+        return leftValue + self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+```
+
 <br>
 
 ## 222. 完全二叉树的节点个数
@@ -120,6 +165,14 @@ class Solution {
         return countNodes(root.left) + countNodes(root.right) + 1;
     }
 }
+```
+
+```python
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 ```
 
 <br>
