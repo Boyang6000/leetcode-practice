@@ -615,6 +615,25 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        if not root:
+            return []
+        queue = collections.deque([root])
+        res = []
+        while queue:
+            level = len(queue)
+            level_res = []
+            for i in range(level):
+                node = queue.popleft()
+                level_res.append(node.val)
+                for j in node.children:
+                        queue.append(j)
+            res.append(level_res)
+        return res
+```
+
 ## 515. 在每个树行中找最大值
 - 题目链接：[**LeetCode 515. Find Largest Value in Each Tree Row**](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
 - 关键词：**Binary Tree, Queue, BFS**
@@ -650,6 +669,27 @@ class Solution {
         return list;
     }
 }
+```
+
+```python
+class Solution:
+    def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        queue = collections.deque([root])
+        res = []
+        while queue:
+            level = len(queue)
+            num = float('-inf')
+            for i in range(level):
+                node = queue.popleft()
+                num = max(num, node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            res.append(num)
+        return res
 ```
 
 ## 116. 填充每个节点的下一个右侧节点指针
@@ -690,6 +730,27 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        queue = collections.deque([root])
+        while queue:
+            level = len(queue)
+            prev = None
+            for i in range(level):
+                node = queue.popleft()
+                if prev:
+                    prev.next = node
+                prev = node
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return root
+```
+
 ## 117. 填充每个节点的下一个右侧节点指针II
 - 题目链接：[**LeetCode 117. Populating Next Right Pointers in Each Node II**](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/)
 - 关键词：**Binary Tree, Queue, BFS, Two Pointers**
@@ -728,6 +789,27 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
+        queue = collections.deque([root])
+        while queue:
+            level = len(queue)
+            prev = None
+            for i in range(level):
+                node = queue.popleft()
+                if prev:
+                    prev.next = node
+                prev = node
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return root
+```
+
 ## 104. 二叉树的最大深度
 - 题目链接：[**LeetCode 104. Maximum Depth of Binary Tree**](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 - 关键词：**Binary Tree, Queue, BFS**
@@ -761,6 +843,25 @@ class Solution {
         return depth;
     }
 }
+```
+
+```python
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        queue = collections.deque([root])
+        depth = 0
+        while queue:
+            level = len(queue)
+            depth += 1
+            for i in range(level):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return depth
 ```
 
 ## 111. 二叉树的最小深度
@@ -797,6 +898,26 @@ class Solution {
         return depth;
     }
 }
+```
+
+```python
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        queue = collections.deque([root])
+        depth = 0
+        while deque:
+            depth += 1
+            for i in range(len(queue)):
+                node = queue.popleft()
+                if not node.left and not node.right:
+                    return depth
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return depth
 ```
 
 ## 📝 今日心得
