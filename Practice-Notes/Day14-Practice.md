@@ -35,6 +35,25 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 
+        queue = collections.deque([root])
+        ans = 0
+        while(queue):
+            for i in range(len(queue)):
+                node = queue.popleft()
+                if i == 0:
+                    ans = node.val
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return ans
+```
+
 <br>
 
 ## 112. 路径总和
@@ -63,6 +82,16 @@ class Solution {
         return false;
     }
 }
+```
+
+```python
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root:
+            return False
+        if not root.left and not root.right and targetSum == root.val:
+            return True
+        return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
 ```
 
 <br>
@@ -114,6 +143,25 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        result = []
+        self.traversal(root, targetSum, [], result)
+        return result
+    
+    def traversal(self, node, count, path, result):
+        if not node:
+            return
+        path.append(node.val)
+        count -= node.val
+        if not node.left and not node.right and count == 0:
+            result.append(list(path))
+        self.traversal(node.left, count, path, result)
+        self.traversal(node.right, count, path, result)
+        path.pop()
+```
+
 <br>
 
 ## 106. 从中序与后序遍历序列构造二叉树
@@ -160,6 +208,29 @@ class Solution {
         return root;
     }
 }
+```
+
+```python
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        if not postorder:
+            return None
+        
+        root_val = postorder[-1]
+        root = TreeNode(root_val)
+
+        separator_idx = inorder.index(root_val)
+
+        inorder_left = inorder[:separator_idx]
+        inorder_right = inorder[1+separator_idx:]
+
+        postorder_left = postorder[:len(inorder_left)]
+        postorder_right = postorder[len(inorder_left):len(postorder) - 1]
+
+        root.left = self.buildTree(inorder_left, postorder_left)
+        root.right = self.buildTree(inorder_right, postorder_right)
+
+        return root
 ```
 
 <br>
@@ -209,6 +280,29 @@ class Solution {
         return root;
     }
 }
+```
+
+```python
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if not preorder:
+            return None
+        
+        rootVal = preorder[0]
+        root = TreeNode(rootVal)
+
+        middleIndex = inorder.index(rootVal)
+        
+        inorder_left = inorder[:middleIndex]
+        inorder_right = inorder[middleIndex + 1:]
+
+        preorder_left = preorder[1: 1 + len(inorder_left)]
+        preorder_right = preorder[1 + len(inorder_left):]
+
+        root.left = self.buildTree(preorder_left, inorder_left)
+        root.right = self.buildTree(preorder_right, inorder_right)
+
+        return root
 ```
 
 <br>
