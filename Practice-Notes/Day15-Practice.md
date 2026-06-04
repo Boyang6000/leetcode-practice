@@ -122,6 +122,17 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root or root.val == val:
+            return root
+        if root.val > val:
+            return self.searchBST(root.left, val)
+        if root.val < val:
+            return self.searchBST(root.right, val)
+```
+
 <br>
 
 ## 98. 验证二叉搜索树
@@ -152,6 +163,21 @@ class Solution {
         return right; 
     }
 }
+```
+
+```python
+class Solution:
+    def __init__(self):
+        self.prev = None
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        left = self.isValidBST(root.left)
+        if self.prev is not None and self.prev.val >= root.val:
+            return False
+        self.prev = root
+        right = self.isValidBST(root.right)
+        return left and right
 ```
 
 <br>
