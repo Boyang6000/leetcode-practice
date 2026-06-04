@@ -41,6 +41,19 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None
+        max_val = max(nums)
+        max_idx = nums.index(max_val)
+        node = TreeNode(max_val)
+        node.left = self.constructMaximumBinaryTree(nums[:max_idx])
+        node.right = self.constructMaximumBinaryTree(nums[1+max_idx:])
+        return node
+```
+
 <br>
 
 ## 617. 合并二叉树
@@ -68,6 +81,20 @@ class Solution {
         return root;
     }
 }
+```
+
+```python
+class Solution:
+    def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root1:
+            return root2
+        if not root2:
+            return root1
+        
+        root = TreeNode(root1.val + root2.val)
+        root.left = self.mergeTrees(root1.left, root2.left)
+        root.right = self.mergeTrees(root1.right, root2.right)
+        return root
 ```
 
 <br>
