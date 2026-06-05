@@ -34,6 +34,26 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def __init__(self):
+        self.result = float('inf')
+        self.prev = None
+
+    def traversal(self, cur):
+        if not cur:
+            return
+        self.traversal(cur.left)
+        if self.prev is not None:
+            self.result = min(self.result, cur.val - self.prev.val)
+        self.prev = cur
+        self.traversal(cur.right)
+
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        self.traversal(root)
+        return self.result
+```
+
 <br>
 
 ## 501. 二叉搜索树中的众数
@@ -96,6 +116,43 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def __init__(self):
+        self.maxCount = 0
+        self.count = 0
+        self.prev = None
+        self.result = []
+
+    def searchBST(self, cur):
+        if cur is None:
+            return
+        self.searchBST(cur.left)
+        if self.prev == None:
+            self.count = 1
+        elif self.prev.val == cur.val:
+            self.count += 1
+        else:
+            self.count = 1
+        self.prev = cur
+        if self.count == self.maxCount:
+            self.result.append(cur.val)
+        if self.count > self.maxCount:
+            self.maxCount = self.count
+            self.result = [cur.val]
+        self.searchBST(cur.right)
+        return
+
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        self.maxCount = 0
+        self.count = 0
+        self.prev = None
+        self.result = []
+
+        self.searchBST(root)
+        return self.result
+```
+
 <br>
 
 ## 236. 二叉树的最近公共祖先 
@@ -123,6 +180,22 @@ class Solution {
         else return root;
     }
 }
+```
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None or root == q or root == p:
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        if left and right:
+            return root
+        elif left is None:
+            return right
+        else:
+            return left
 ```
 
 <br>
