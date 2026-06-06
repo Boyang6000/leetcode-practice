@@ -26,6 +26,17 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root.val > p.val and root.val > q.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif root.val < p.val and root.val < q.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
+```
+
 <br>
 
 ## 701. 二叉搜索树中的插入操作
@@ -53,6 +64,20 @@ class Solution {
         return root;
     }
 }
+```
+
+```python
+class Solution:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            root = TreeNode(val)
+            return root
+        
+        if root.val > val:
+            root.left = self.insertIntoBST(root.left, val)
+        if root.val < val:
+            root.right = self.insertIntoBST(root.right, val)
+        return root
 ```
 
 <br>
@@ -102,6 +127,24 @@ class Solution {
         return root;
     }
 }
+```
+
+```python
+class Solution:
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        if not root:
+            return root
+        if root.val == key:
+            if not root.right:
+                return root.left
+            cur = root.right
+            while cur.left:
+                cur = cur.left
+            root.val, cur.val = cur.val, root.val
+
+        root.left = self.deleteNode(root.left, key)
+        root.right = self.deleteNode(root.right, key)
+        return root
 ```
 
 <br>
