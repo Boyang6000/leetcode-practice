@@ -28,6 +28,20 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
+        if not root:
+            return None
+        if root.val < low:
+            return self.trimBST(root.right, low, high)
+        if root.val > high:
+            return self.trimBST(root.left, low, high)
+        root.left = self.trimBST(root.left, low, high)
+        root.right = self.trimBST(root.right, low, high)
+        return root
+```
+
 <br>
 
 ## 108. 将有序数组转换为二叉搜索树  
@@ -61,6 +75,18 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None
+        mid = len(nums) // 2
+        root = TreeNode(nums[mid])
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid+1:])
+        return root
+```
+
 <br>
 
 ## 538. 把二叉搜索树转换为累加树
@@ -92,6 +118,21 @@ class Solution {
         convertBST1(root.left);
     }
 }
+```
+
+```python
+class Solution:
+    def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        self.prev = 0
+        self.traversal(root)
+        return root
+    def traversal(self, cur):
+        if not cur:
+            return
+        self.traversal(cur.right)
+        cur.val += self.prev
+        self.prev = cur.val
+        self.traversal(cur.left)
 ```
 
 <br>
