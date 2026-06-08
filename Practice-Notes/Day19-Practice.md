@@ -38,6 +38,23 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        result = []
+        self.backtracking(n, k, 1, [], result)
+        return result
+
+    def backtracking(self, n, k, startIndex, path, result):
+        if len(path) == k:
+            result.append(path[:])
+            return
+        for i in range(startIndex, n - (k - len(path)) + 2):
+            path.append(i)
+            self.backtracking(n, k, i + 1, path, result)
+            path.pop()
+```
+
 <br>
 
 ## 216. 组合总和III  
@@ -82,6 +99,27 @@ class Solution {
 }
 ```
 
+
+```python
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        result = []
+        self.backtracking(n, k, 0, 1, [], result)
+        return result
+    def backtracking(self, n, k, curSum, startIndex, path, result):
+        if curSum > n:
+            return
+        if len(path) == k and curSum == n:
+            result.append(path[:])
+        
+        for i in range(startIndex, 9 - (k - len(path)) + 2):
+            path.append(i)
+            curSum += i
+            self.backtracking(n, k, curSum, i+1, path, result)
+            curSum -= i
+            path.pop()
+```
+
 <br>
 
 ## 17. 电话号码的字母组合
@@ -121,6 +159,37 @@ class Solution {
         }
     }
 }
+```
+
+```python
+class Solution:
+    def __init__(self):
+        self.letterMap = [
+            "",
+            "",
+            "abc",
+            "def",
+            "ghi",
+            "jkl",
+            "mno",
+            "pqrs",
+            "tuv",
+            "wxyz"
+        ]
+    def getCombinations(self, digits, index, s, result):
+        if index == len(digits):
+            result.append(s)
+            return
+        digit = int(digits[index])
+        letters = self.letterMap[digit]
+        for letter in letters:
+            self.getCombinations(digits, index+1, s+letter, result)
+    def letterCombinations(self, digits: str) -> List[str]:
+        result = []
+        if len(digits) == 0:
+            return result
+        self.getCombinations(digits, 0, "", result)
+        return result
 ```
 
 <br>
