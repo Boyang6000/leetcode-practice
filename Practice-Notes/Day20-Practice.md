@@ -41,6 +41,26 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        candidates.sort()
+        self.backtracking(candidates, target, 0, [], result)
+        return result
+    def backtracking(self, candidates, target, startIndex, path, result):
+        if target == 0:
+            result.append(path[:])
+            return
+        
+        for i in range(startIndex, len(candidates)):
+            if target - candidates[i] < 0:
+                break
+            path.append(candidates[i])
+            self.backtracking(candidates, target - candidates[i], i, path, result)
+            path.pop()
+```
+
 <br>
 
 ## 40. 组合总和II
@@ -87,6 +107,29 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        candidates.sort()
+        self.backtracking(candidates, target, 0, [], result)
+        return result
+    
+    def backtracking(self, candidates, target, startIndex, path, result):
+        if target == 0:
+            result.append(path[:])
+            return
+        
+        for i in range(startIndex, len(candidates)):
+            if i > startIndex and candidates[i] == candidates[i - 1]:
+                continue
+            if target - candidates[i] < 0 :
+                break
+            path.append(candidates[i])
+            self.backtracking(candidates, target - candidates[i], i + 1, path, result)
+            path.pop()
+```
+
 <br>
 
 ## 131. 分割回文串
@@ -131,6 +174,25 @@ class Solution {
         return true;
     }
 }
+```
+
+```python
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        result = []
+        self.backtracking(s, 0, [], result)
+        return result
+    
+    def backtracking(self, s, startIndex, path, result):
+        if startIndex == len(s):
+            result.append(path[:])
+            return
+        
+        for i in range(startIndex, len(s)):
+            if s[startIndex:i+1] == s[startIndex: i+1][::-1]:
+                path.append(s[startIndex:i+1])
+                self.backtracking(s, i+1, path, result)
+                path.pop()
 ```
 
 <br>
