@@ -66,6 +66,42 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        result = []
+        self.backtracking(s, 0, 0, "", result)
+        return result
+    
+    def backtracking(self, s, startIndex, point_num, current, result):
+        if point_num == 3:
+            if self.is_valid(s, startIndex, len(s) - 1):
+                current += s[startIndex:]
+                result.append(current)
+            return
+        
+        for i in range(startIndex, len(s)):
+            if self.is_valid(s, startIndex, i):
+                sub = s[startIndex: i+1]
+                self.backtracking(s, i+1, point_num+1, current + sub + '.', result)
+            else:
+                break
+
+    def is_valid(self, s, start, end):
+        if start > end:
+            return False
+        if s[start] == '0' and start != end:
+            return False
+        num = 0
+        for i in range(start, end + 1):
+            if not s[i].isdigit():
+                return False
+            num = num * 10 + int(s[i])
+            if num > 255:
+                return False
+        return True
+```
+
 <br>
 
 ## 78. 子集
@@ -103,6 +139,21 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        self.backtracking(nums, 0, [], result)
+        return result
+    
+    def backtracking(self, nums, startIndex, path, result):
+        result.append(path[:])
+        for i in range(startIndex, len(nums)):
+            path.append(nums[i])
+            self.backtracking(nums, i + 1, path, result)
+            path.pop()
+```
+
 <br>
 
 ## 90. 子集II
@@ -137,6 +188,24 @@ class Solution {
         }
     }
 }
+```
+
+```python
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        nums.sort()
+        self.backtracking(nums, 0, [], result)
+        return result
+    
+    def backtracking(self, nums, startIndex, path, result):
+        result.append(path[:])
+        for i in range(startIndex, len(nums)):
+            if i > startIndex and nums[i] == nums[i - 1]:
+                continue
+            path.append(nums[i])
+            self.backtracking(nums, i+1, path, result)
+            path.pop()
 ```
 
 <br>
