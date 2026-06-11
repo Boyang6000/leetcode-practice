@@ -42,6 +42,27 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        self.backtracking(nums, 0, [], result)
+        return result
+    
+    def backtracking(self, nums, startIndex, path, result):
+        if len(path) > 1:
+            result.append(path[:])
+        
+        use = set()
+        for i in range(startIndex, len(nums)):
+            if (path and nums[i] < path[-1]) or nums[i] in use:
+                continue
+            use.add(nums[i])
+            path.append(nums[i])
+            self.backtracking(nums, i + 1, path, result)
+            path.pop()
+```
+
 <br>
 
 ## 46. 全排列
@@ -80,6 +101,28 @@ class Solution {
         }
     }
 }
+```
+
+```python
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        self.backtracking(nums, [], [False] * len(nums), result)
+        return result
+
+    def backtracking(self, nums, path, used, result):
+        if len(path) == len(nums):
+            result.append(path[:])
+            return
+        
+        for i in range(len(nums)):
+            if used[i]:
+                continue
+            used[i] = True
+            path.append(nums[i])
+            self.backtracking(nums, path, used, result)
+            path.pop()
+            used[i] = False
 ```
 
 <br>
@@ -127,6 +170,28 @@ class Solution {
         }
     }
 }
+```
+
+```python
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        result = []
+        self.backtracking(nums, [], [False] * len(nums), result)
+        return result
+
+    def backtracking(self, nums, path, used, result):
+        if len(path) == len(nums):
+            result.append(path[:])
+            return
+        for i in range(len(nums)):
+            if (i > 0 and nums[i] == nums[i-1] and not used[i-1]) or used[i]:
+                continue
+            used[i] = True
+            path.append(nums[i])
+            self.backtracking(nums, path, used, result)
+            path.pop()
+            used[i] = False
 ```
 
 <br>
