@@ -34,6 +34,20 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        g.sort()
+        s.sort()
+        index = len(s) - 1
+        result = 0
+        for i in range(len(g) - 1, -1, -1):
+            if index >= 0 and s[index] >= g[i]:
+                result += 1
+                index -= 1
+        return result     
+```
+
 <br>
 
 ## 376. 摆动序列
@@ -68,6 +82,21 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        if len(nums) <= 1:
+            return len(nums)
+        preDiff, curDiff, result = 0, 0, 1
+        for i in range(len(nums) - 1):
+            curDiff = nums[i + 1] - nums[i]
+            if preDiff * curDiff <= 0 and curDiff != 0:
+                result += 1 
+                preDiff = curDiff
+        
+        return result
+```
+
 <br>
 
 ## 53. 最大子序和
@@ -96,6 +125,20 @@ class Solution {
        return sum;
     }
 }
+```
+
+```python
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        result = float('-inf')
+        count = 0
+        for i in range(len(nums)):
+            count += nums[i]
+            if count > result:
+                result = count
+            if count < 0:
+                count = 0
+        return result
 ```
 
 <br>
