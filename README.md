@@ -33,13 +33,13 @@
 - 2026-06-13 · Day 24：日志 → [Day 24](Practice-Notes/Day24-Practice.md)
 - 2026-06-14 · Day 25：日志 → [Day 25](Practice-Notes/Day25-Practice.md)
 - 2026-06-15 · Day 26：日志 → [Day 26](Practice-Notes/Day26-Practice.md)
-- 2025-09-22 · Day 27：日志 → [Day 27](Practice-Notes/Day27-Practice.md)
-- 2025-09-23 · Day 28：日志 → [Day 28](Practice-Notes/Day28-Practice.md)
-- 2025-09-24 · Day 29：日志 → [Day 29](Practice-Notes/Day29-Practice.md)
-- 2025-09-25 · Day 30：日志 → [Day 30](Practice-Notes/Day30-Practice.md)
-- 2025-09-26 · Day 31：日志 → [Day 31](Practice-Notes/Day31-Practice.md)
-- 2025-09-27 · Day 32：日志 → [Day 32](Practice-Notes/Day32-Practice.md)
-- 2025-09-28 · Day 33：日志 → **周日休息日**
+- 2026-06-16 · Day 27：日志 → [Day 27](Practice-Notes/Day27-Practice.md)
+- 2026-06-17 · Day 28：日志 → [Day 28](Practice-Notes/Day28-Practice.md)
+- 2026-06-18 · Day 29：日志 → [Day 29](Practice-Notes/Day29-Practice.md)
+- 2026-06-19 · Day 30：日志 → [Day 30](Practice-Notes/Day30-Practice.md)
+- 2026-06-20 · Day 31：日志 → [Day 31](Practice-Notes/Day31-Practice.md)
+- 2026-06-21 · Day 32：日志 → [Day 32](Practice-Notes/Day32-Practice.md)
+- 2026-06-22 · Day 33：日志 → [Day 33](Practice-Notes/Day33-Practice.md)
 
 
 <br>
