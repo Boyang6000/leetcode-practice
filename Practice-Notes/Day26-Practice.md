@@ -35,6 +35,21 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        if len(points) == 0:
+            return 0
+        points.sort(key=lambda x: x[0])
+        result = 1
+        for i in range(1, len(points)):
+            if points[i][0] > points[i-1][1]:
+                result += 1
+            else:
+                points[i][1] = min(points[i][1], points[i-1][1])
+        return result
+```
+
 <br>
 
 ## 435. 无重叠区间
@@ -67,6 +82,20 @@ class Solution {
         return intervals.length - count;
     }
 }
+```
+
+```python
+class Solution:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        if len(intervals) == 0:
+            return 0
+        intervals.sort(key=lambda x: x[0])
+        result = 0
+        for i in range(1, len(intervals)):
+            if intervals[i][0] < intervals[i-1][1]:
+                intervals[i][1] = min(intervals[i][1], intervals[i-1][1])
+                result += 1
+        return result
 ```
 
 <br>
@@ -104,6 +133,24 @@ class Solution {
         return list;
     }
 }
+```
+
+```python
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        last_occurance = {}
+        for i, ch in enumerate(s):
+            last_occurance[ch] = i
+        
+        result = []
+        start = 0
+        end = 0
+        for i, ch in enumerate(s):
+            end = max(end, last_occurance[ch])
+            if i == end:
+                result.append(end - start + 1)
+                start = i + 1
+        return result
 ```
 
 <br>
