@@ -1,4 +1,4 @@
-# 📝 LeetCode 学习日志 Day 28
+# 📝 LeetCode 学习日志 Day 24
 
 <br>
 
@@ -37,6 +37,15 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        result = 0
+        for i in range(1, len(prices)):
+            result += max(prices[i] - prices[i-1], 0)
+        return result
+```
+
 <br>
 
 ## 55. 跳跃游戏
@@ -64,6 +73,22 @@ class Solution {
         return false;
     }
 }
+```
+
+```python
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        cover = 0
+        if len(nums) == 1:
+            return True
+        i = 0
+        while i <= cover:
+            cover = max(i + nums[i], cover)
+            if cover >= len(nums) - 1:
+                return True
+            
+            i += 1
+        return False
 ```
 
 <br>
@@ -96,6 +121,24 @@ class Solution {
         return result;
     }
 }
+```
+
+```python
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return 0
+        curDistance = 0
+        nextDistance = 0
+        result = 0
+        for i in range(len(nums) - 1):
+            nextDistance = max(nextDistance, i+nums[i])
+            if i == curDistance:
+                result += 1
+                curDistance = nextDistance
+                if nextDistance >= len(nums) - 1:
+                    break
+        return result
 ```
 
 <br>
@@ -141,6 +184,23 @@ class Solution {
         return sum;
     }
 }
+```
+
+```python
+class Solution:
+    def largestSumAfterKNegations(self, nums: List[int], k: int) -> int:
+        nums.sort(key=lambda x: abs(x), reverse=True)
+
+        for i in range(len(nums)):
+            if nums[i] < 0 and k > 0:
+                nums[i] *= -1
+                k -= 1
+        
+        if k % 2 == 1:
+            nums[-1] *= -1
+
+        result = sum(nums)
+        return result
 ```
 
 <br>
