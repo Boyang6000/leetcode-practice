@@ -37,6 +37,25 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        curSum = 0
+        totalSum = 0
+        start = 0
+        for i in range(len(gas)):
+            curSum += gas[i] - cost[i]
+            totalSum += gas[i] - cost[i]
+
+            if curSum < 0:
+                start = i + 1
+                curSum = 0
+        
+        if totalSum < 0:
+            return -1
+        return start
+```
+
 <br>
 
 ## 135. 分发糖果
@@ -78,6 +97,23 @@ class Solution {
         return sum;
     }
 }
+```
+
+```python
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [1] * n
+
+        for i in range(1, n):
+            if ratings[i] > ratings[i-1]:
+                candies[i] = candies[i-1] + 1
+        
+        for j in range(n-2, -1, -1):
+            if ratings[j] > ratings[j + 1]:
+                candies[j] = max(candies[j + 1] + 1, candies[j])
+        
+        return sum(candies)
 ```
 
 <br>
@@ -129,6 +165,28 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        five = 0
+        ten = 0
+        for i in range(len(bills)):
+            if bills[i] == 5:
+                five += 1
+            elif bills[i] == 10:
+                five -= 1
+                ten += 1
+            else:
+                if ten > 0:
+                    ten -= 1
+                    five -= 1
+                else:
+                    five -= 3
+            if five < 0 or ten < 0:
+                return False
+        return True
+```
+
 <br>
 
 ## 406. 根据身高重建队列
@@ -166,6 +224,16 @@ class Solution {
         return que.toArray(new int[people.length][]);
     }
 }
+```
+
+```python
+class Solution:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        people.sort(key=lambda x: (-x[0], x[1]))
+        que = []
+        for p in people:
+            que.insert(p[1], p)
+        return que
 ```
 
 <br>
