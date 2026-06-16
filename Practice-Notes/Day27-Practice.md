@@ -36,6 +36,22 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        result = []
+        if len(intervals) == 0:
+            return result
+        intervals.sort(key=lambda x: x[0])
+        result.append(intervals[0])
+        for i in range(1, len(intervals)):
+            if result[-1][1] >= intervals[i][0]:
+                result[-1][1] = max(result[-1][1], intervals[i][1])
+            else:
+                result.append(intervals[i])
+        return result
+```
+
 <br>
 
 ## 738. 单调递增的数字
@@ -71,6 +87,16 @@ class Solution {
         return Integer.parseInt(String.valueOf(chars));
     }
 }
+```
+
+```python
+class Solution:
+    def monotoneIncreasingDigits(self, n: int) -> int:
+        strNum = str(n)
+        for i in range(len(strNum) - 1, 0, -1):
+            if strNum[i-1] > strNum[i]:
+                strNum = strNum[:i-1] + str(int(strNum[i-1])-1) + '9'*(len(strNum) - i)
+        return int(strNum)
 ```
 
 <br>
