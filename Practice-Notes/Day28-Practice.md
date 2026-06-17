@@ -51,6 +51,20 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def fib(self, n: int) -> int:
+        if n == 0:
+            return 0
+        dp = [0] * (n+1)
+        dp[0] = 0
+        dp[1] = 1
+        for i in range(2, n+1):
+            dp[i] = dp[i - 1] + dp[i - 2]
+        
+        return dp[n]
+```
+
 <br>
 
 ## 70. 爬楼梯
@@ -80,6 +94,20 @@ class Solution {
         return dp[n];
     }
 }
+```
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if  n <= 2:
+            return n
+        dp = [0] * (n+1)
+        dp[0] = 1
+        dp[1] = 1
+        for i in range(2, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+        
+        return dp[n]
 ```
 
 <br>
@@ -113,6 +141,18 @@ class Solution {
         return dp[len];
     }
 }
+```
+
+```python
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        dp = [0] * (len(cost) + 1)
+        dp[0] = 0
+        dp[1] = 0
+        for i in range(2, len(cost) + 1):
+            dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
+
+        return dp[len(cost)]
 ```
 
 <br>
