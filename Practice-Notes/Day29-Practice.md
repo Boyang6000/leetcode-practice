@@ -36,6 +36,20 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [[0]*n for _ in range(m)]
+        for i in range(m):
+            dp[i][0] = 1
+        for j in range(n):
+            dp[0][j] = 1
+        for k in range(1, m):
+            for l in range(1, n):
+                dp[k][l] = dp[k-1][l] + dp[k][l-1]
+        return dp[m-1][n-1]
+```
+
 <br>
 
 ## 63. 不同路径 II
@@ -79,6 +93,33 @@ class Solution {
         return dp[m-1][n-1];
     }
 }
+```
+
+```python
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+        dp = [[0]*n for _ in range(m)]
+        if obstacleGrid[m-1][n-1] == 1 or obstacleGrid[0][0] == 1:
+            return 0
+        for i in range(m):
+            if obstacleGrid[i][0] == 0:
+                dp[i][0] = 1
+            else:
+                break
+        for j in range(n):
+            if obstacleGrid[0][j] == 0:
+                dp[0][j] = 1
+            else:
+                break
+        
+        for k in range(1,m):
+            for l in range(1,n):
+                if obstacleGrid[k][l] == 1:
+                    continue
+                dp[k][l] = dp[k-1][l] + dp[k][l-1]
+        return dp[m-1][n-1]
 ```
 
 <br>
