@@ -39,6 +39,19 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        if sum(nums) % 2 == 1:
+            return False
+        half = sum(nums) // 2
+        dp = [0] * (half + 1)
+        for num in nums:
+            for j in range(half, num - 1, -1):
+                dp[j] = max(dp[j], dp[j-num] + num)
+        return dp[-1] == half
+```
+
 <br>
 
 ## 📝 今日心得
