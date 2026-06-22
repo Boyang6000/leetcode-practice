@@ -113,5 +113,32 @@ class Solution:
 
 <br>
 
+## 474. 目标和
+- 题目链接：[**LeetCode 474. Ones and Zeroes**](https://leetcode.com/problems/ones-and-zeroes/)
+- 关键词：**Dynamic Programming**  
+
+<br>
+
+## 💡 思路
+这道题本质上还是用到的是01背包的方法。这个是二维01背包，两个维度，m和n
+
+<br>
+
+## 💻 代码实现
+```python
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        for s in strs:
+            zeroNum = s.count('0')
+            oneNum = len(s) - zeroNum
+            for i in range(m, zeroNum - 1, -1):
+                for j in range(n, oneNum - 1, -1):
+                    dp[i][j] = max(dp[i][j], dp[i-zeroNum][j-oneNum] + 1)
+        return dp[m][n]
+```
+
+<br>
+
 ## 📝 今日心得
 背包问题非常的深奥，里面的变化也是特别多的。今天认真学习了01背包的二维数组实现和一维数组的实现。因为二维数组的公式推导是由左上的值和上方的值进行推导，压缩到一维数组里可以理解为复制了上方的数组，然后再和左上的值进行推导，这里的重点在于背包容量循环是倒序，如果是正序的话，物品会被添加多次，导致数据不准确。
