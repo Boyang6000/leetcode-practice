@@ -38,6 +38,19 @@ class Solution {
 }
 ```
 
+```python
+class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        total = sum(stones)
+        target = total // 2
+        dp = [0] * (target + 1)
+        for i in stones:
+            for j in range(target, i - 1, -1):
+                dp[j] = max(dp[j], dp[j-i] + i)
+        
+        return total - 2*dp[-1]
+```
+
 <br>
 
 ## 494. 目标和
@@ -79,6 +92,23 @@ class Solution {
         return dp[size];
     }
 }
+```
+
+```python
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        total = sum(nums)
+        if abs(target) > total:
+            return 0
+        if (target + total) % 2 == 1:
+            return 0
+        target_sum = (target + total) // 2
+        dp = [0] * (target_sum + 1)
+        dp[0] = 1
+        for num in nums:
+            for i in range(target_sum, num - 1, -1):
+                dp[i] += dp[i-num]
+        return dp[target_sum]
 ```
 
 <br>
