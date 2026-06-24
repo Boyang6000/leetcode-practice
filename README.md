@@ -41,6 +41,7 @@
 - 2026-06-21 · Day 32：日志 → [Day 32](Practice-Notes/Day32-Practice.md)
 - 2026-06-22 · Day 33：日志 → [Day 33](Practice-Notes/Day33-Practice.md)
 - 2026-06-23 · Day 34：日志 → [Day 34](Practice-Notes/Day34-Practice.md)
+- 2026-06-24 · Day 35：日志 → [Day 35](Practice-Notes/Day35-Practice.md)
 
 
 <br>
