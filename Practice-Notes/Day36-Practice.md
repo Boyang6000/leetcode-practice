@@ -2,14 +2,14 @@
 
 <br>
 
-## 121. 买卖股票的最佳时机
-- 题目链接：[**LeetCode 121. Best Time to Buy and Sell Stock**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+## 188. 买卖股票的最佳时机 IV
+- 题目链接：[**LeetCode 188. Best Time to Buy and Sell Stock IV**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
 - 关键词：**Dynamic Programming**  
 
 <br>
 
 ## 💡 思路
-这道题用到的是动态规划的方法，dp0记录的是手里持股的状态，dp1记录的是手里不持股的状态
+这道题是123的泛化，偶数为买入/持股，奇数为卖出
 
 
 <br>
@@ -17,24 +17,31 @@
 ## 💻 代码实现
 ```python
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        dp0, dp1 = -prices[0], 0
-        for i in range(1, len(prices)):
-            dp1 = max(dp1, dp0 + prices[i])
-            dp0 = max(dp0, -prices[i])
-        return dp1
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        dp = [0] * k * 2
+        for i in range(k):
+            dp[i * 2] = -prices[0]
+        for price in prices[1:]:
+            dc = dp[:]
+            for i in range(2 * k):
+                if i % 2 == 1:
+                    dp[i] = max(dc[i], dc[i-1] + price)
+                else:
+                    pre = 0 if i == 0 else dc[i-1]
+                    dp[i] = max(dc[i], pre - price)
+        return dp[-1]
 ```
 
 <br>
 
-## 122. 买卖股票的最佳时机 II
-- 题目链接：[**LeetCode 122. Best Time to Buy and Sell Stock II**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+## 309. 最佳买卖股票时机含冷冻期
+- 题目链接：[**LeetCode 309. Best Time to Buy and Sell Stock with Cooldown**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 - 关键词：**Dynamic Programming**  
 
 <br>
 
 ## 💡 思路
-在121的基础上，因为可以多次买入卖出，今天不持有的话，可以用之前的利润来买入，所以dp0需要改动。
+在123的基础上，分成四种状态：dp[0] = hold，dp[1] = free，dp[2] = sold，dp[3] = cooldown
 
 <br>
 
@@ -42,51 +49,42 @@ class Solution:
 ```python
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        dp = [[0] * 2 for _ in range(len(prices))]
-        dp[0][0] = -prices[0]
-        dp[0][1] = 0
-        for i in range(1, len(prices)):
-            dp[i][0] = max(dp[i-1][0], dp[i-1][1] - prices[i])
-            dp[i][1] = max(dp[i-1][1], dp[i-1][0] + prices[i])
-        return dp[-1][1]
+        dp = [-prices[0], 0, 0, 0]
+        for price in prices[1:]:
+            dc = dp[:]
+            dp[0] = max(dc[0], dc[1] - price, dc[3] - price)
+            dp[1] = max(dc[1], dc[3])
+            dp[2] = dc[0] + price
+            dp[3] = dc[2]
+        return max(dp)
 ```
 
 <br>
 
-## 123. 买卖股票的最佳时机 III
-- 题目链接：[**LeetCode 123. Best Time to Buy and Sell Stock III**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)
+## 714. 买卖股票的最佳时机含手续费
+- 题目链接：[**LeetCode 714. Best Time to Buy with Transaction Fee**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
 - 关键词：**Dynamic Programming**  
 
 <br>
 
 ## 💡 思路
-在120，121的基础上，因为只能买卖两次，所以一天一共就有五个状态：
-1. 没有操作
-2. 第一次持有股票
-3. 第一次不持有股票
-4. 第二次持有股票
-5. 第二次不持有股票
+在123的基础上，记录两个状态，一个是holding，一个是not holding。
 
 <br>
 
 ## 💻 代码实现
 ```python
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        if len(prices) == 0:
-            return 0
-        dp = [0] * 5
-        dp[1] = -prices[0]
-        dp[3] = -prices[0]
-        for i in range(1, len(prices)):
-            dp[1] = max(dp[1], dp[0] - prices[i])
-            dp[2] = max(dp[2], dp[1] + prices[i])
-            dp[3] = max(dp[3], dp[2] - prices[i])
-            dp[4] = max(dp[4], dp[3] + prices[i])
-        return dp[4]
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        dp = [0] * 2
+        dp[0] = -prices[0] - fee
+        for price in prices:
+            dp[0] = max(dp[0], dp[1] - price - fee)
+            dp[1] = max(dp[1], dp[0] + price)
+        return max(dp)
 ```
 
 <br>
 
 ## 📝 今日心得
-今天练习的的是股票买卖的三种变化，一种是只能买卖一次，一种是买卖多次，一种是买卖两次，重点在于记录每一天的不同状态。
+今天练习的的是股票买卖的几种变化，重点在于用dp来去记录不同的状态，update状态看保持max保持这种状态还是从别的状态变成记录的这个状态。
