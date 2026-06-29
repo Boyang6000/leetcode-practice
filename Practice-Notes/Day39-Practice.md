@@ -1,15 +1,15 @@
-# 📝 LeetCode 学习日志 Day 37
+# 📝 LeetCode 学习日志 Day 39
 
 <br>
 
-## 300. 最长递增子序列
-- 题目链接：[**LeetCode 300. Longest Increasing Subsequence**](https://leetcode.com/problems/longest-increasing-subsequence/)
+## 115. 不同的子序列
+- 题目链接：[**LeetCode 115. Distinct Subsequences**](https://leetcode.com/problems/distinct-subsequences/)
 - 关键词：**Dynamic Programming**  
 
 <br>
 
 ## 💡 思路
-这道题是dp解决子序列的一个例题，用dp[i]来记录以nums[i]为结尾的最长子序列是多少，然后如果nums[i] > nums[j]，说明nums[i]可以接在nums[j]后面，那么就比较dp[i] 跟dp[j] + 1哪个大就保存哪个。
+这道题用的是dp的思路，当s[i-1] == t[j-1]时，我们可以用s[i-1]去匹配t[j-1]，也可以用s[:i-1]去匹配t[:j]
 
 
 <br>
@@ -17,76 +17,84 @@
 ## 💻 代码实现
 ```python
 class Solution:
-    def lengthOfLIS(self, nums: List[int]) -> int:
-        if len(nums) <= 1:
-            return len(nums)
-        dp = [1] * len(nums)
-        result = 1
-        for i in range(1, len(nums)):
-            for j in range(0, i):
-                if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-            result = max(result, dp[i])
-        return result
+    def numDistinct(self, s: str, t: str) -> int:
+        dp = [[0]*(len(t)+1) for _ in range(len(s)+1)]
+        for i in range(len(s)):
+            dp[i][0] = 1
+        for j in range(1, len(t)):
+            dp[0][j] = 0
+        for i in range(1, len(s)+1):
+            for j in range(1, len(t)+1):
+                if s[i-1] == t[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+                else:
+                    dp[i][j] = dp[i-1][j]
+        return dp[-1][-1]
 ```
 
 <br>
 
-## 674. 最长连续递增序列
-- 题目链接：[**LeetCode 674. Longest Continuous Increasing Subsequence**](https://leetcode.com/problems/longest-continuous-increasing-subsequence/)
+## 583. 两个字符串的删除操作
+- 题目链接：[**LeetCode 583. Delete Opration for Two Strings**](https://leetcode.com/problems/delete-operation-for-two-strings/)
 - 关键词：**Dynamic Programming**  
 
 <br>
 
 ## 💡 思路
-这个就是在300的基础上，加了一个连续的设定。
+这道题跟115其实很像，两个词相等的时候就不用删除，不相等的时候看哪种删除方式花费最少
 
 <br>
 
 ## 💻 代码实现
 ```python
 class Solution:
-    def findLengthOfLCIS(self, nums: List[int]) -> int:
-        if len(nums) <= 1:
-            return len(nums)
-        dp = [1] * len(nums)
-        result = 1
-        for i in range(1, len(nums)):
-            if nums[i] > nums[i-1]:
-                dp[i] = dp[i-1] + 1
-            result = max(result, dp[i])
-        return result
+    def minDistance(self, word1: str, word2: str) -> int:
+        dp = [[0]*(len(word2)+1) for _ in range(len(word1)+1)]
+        for i in range(len(word1)+1):
+            dp[i][0] = i
+        for j in range(len(word2)+1):
+            dp[0][j] = j
+        for i in range(1, len(word1)+1):
+            for j in range(1, len(word2)+1):
+                if word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i-1][j-1]+2, dp[i-1][j] + 1, dp[i][j-1]+1)
+        return dp[-1][-1] 
 ```
 
 <br>
 
-## 718. 最长重复子数组
-- 题目链接：[**LeetCode 718. Maximum Length of Repeated Subarray**](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)
+## 72. 编辑距离
+- 题目链接：[**LeetCode 72. Edit Distance**](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)
 - 关键词：**Dynamic Programming**  
 
 <br>
 
 ## 💡 思路
-这道题用的是二维dp的解法，也是用dp记录以当前数字为结尾的最大序列，但是重点在于dp[i][j] = dp[i-1][j-1] + 1，说明增长是从左上角来的，所以在设定dp和循环range的时候，得多一位。
+在583的基础上把花费改成1
 
 <br>
 
 ## 💻 代码实现
 ```python
 class Solution:
-    def findLength(self, nums1: List[int], nums2: List[int]) -> int:
-        dp = [[0] * (len(nums2)+1) for _ in range(len(nums1)+1)]
-        result = 0
-        for i in range(1, len(nums1) + 1):
-            for j in range(1, len(nums2) + 1):
-                if nums1[i-1] == nums2[j-1]:
-                    dp[i][j] = dp[i-1][j-1] + 1
-                if dp[i][j] > result:
-                    result = dp[i][j]
-        return result
+    def minDistance(self, word1: str, word2: str) -> int:
+        dp = [[0]*(len(word2)+1) for _ in range(len(word1)+1)]
+        for i in range(len(word1)+1):
+            dp[i][0] = i
+        for j in range(len(word2)+1):
+            dp[0][j] = j
+        for i in range(1, len(word1)+1):
+            for j in range(1, len(word2)+1):
+                if word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i-1][j-1]+1, dp[i-1][j] + 1, dp[i][j-1]+1)
+        return dp[-1][-1] 
 ```
 
 <br>
 
 ## 📝 今日心得
-今天练习的dp解决增长序列的问题，一个全新的思路就是用dp来记录以当前数字为结尾的最大增长序列。
+这个系列就是编辑距离的几种变化，重点在于看两个字符相等时怎么操作，不相等时怎么操作
