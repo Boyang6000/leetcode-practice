@@ -43,10 +43,11 @@
 - 2026-06-23 · Day 34：日志 → [Day 34](Practice-Notes/Day34-Practice.md)
 - 2026-06-24 · Day 35：日志 → [Day 35](Practice-Notes/Day35-Practice.md)
 - 2026-06-25 · Day 36：日志 → [Day 36](Practice-Notes/Day36-Practice.md)
-- 2026-06-26 · Day 37：日志 → [Day 36](Practice-Notes/Day37-Practice.md)
-- 2026-06-27 · Day 38：日志 → [Day 36](Practice-Notes/Day38-Practice.md)
-- 2026-06-28 · Day 39：日志 → [Day 36](Practice-Notes/Day39-Practice.md)
-- 2026-06-29 · Day 40：日志 → [Day 36](Practice-Notes/Day40-Practice.md)
+- 2026-06-26 · Day 37：日志 → [Day 37](Practice-Notes/Day37-Practice.md)
+- 2026-06-27 · Day 38：日志 → [Day 38](Practice-Notes/Day38-Practice.md)
+- 2026-06-28 · Day 39：日志 → [Day 39](Practice-Notes/Day39-Practice.md)
+- 2026-06-29 · Day 40：日志 → [Day 40](Practice-Notes/Day40-Practice.md)
+- 2026-06-30 · Day 41：日志 → [Day 41](Practice-Notes/Day41-Practice.md)
 
 <br>
 <hr>
