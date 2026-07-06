@@ -1,9 +1,9 @@
-# 📝 LeetCode 学习日志 Day 41
+# 📝 LeetCode 学习日志 Day 42
 
 <br>
 
-## 42. 接雨水
-- 题目链接：[**LeetCode 42. Trapping Rain Water**](https://leetcode.com/problems/trapping-rain-water/)
+## 98. 所有可达路径
+- 题目链接：[**LeetCode 98. Trapping Rain Water**](https://leetcode.com/problems/trapping-rain-water/)
 - 关键词：**Dynamic Programming**  
 
 <br>
@@ -27,38 +27,6 @@ class Solution:
                     h = min(height[stack[-1]], height[i]) - height[mid_height]
                     w = i - stack[-1] -1
                     result += h * w
-            stack.append(i)
-        return result
-```
-
-<br>
-
-## 84. 柱状图中最大的矩形
-- 题目链接：[**LeetCode 84. Largest Rectangle in Histogram**](https://leetcode.com/problems/largest-rectangle-in-histogram/)
-- 关键词：**Dynamic Programming**  
-
-<br>
-
-## 💡 思路
-这道题也是用到的单调栈来解决，跟上面的接雨水是反过来的。这道题要找到左右两边比中间矮的，然后计算面积。
-
-<br>
-
-## 💻 代码实现
-```python
-class Solution:
-    def largestRectangleArea(self, heights: List[int]) -> int:
-        heights.insert(0,0)
-        heights.append(0)
-        stack = [0]
-        result = 0
-        for i in range(1, len(heights)):
-            while stack and heights[i] < heights[stack[-1]]:
-                mid_height = heights[stack[-1]]
-                stack.pop()
-                if stack:
-                    area = (i - stack[-1] - 1) * mid_height
-                    result = max(area, result)
             stack.append(i)
         return result
 ```
